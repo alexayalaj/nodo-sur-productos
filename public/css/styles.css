@@ -21,7 +21,7 @@ img{max-width:100%;height:auto;display:block}
 .sesion{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
 .container{flex:1;width:100%;margin:0 auto;padding:2rem 5%}
 .container-login{max-width:28rem}
-.container-ancho{max-width:60rem}
+.container-ancho{max-width:75rem}
 h1{font-size:2.25rem;line-height:1.2;margin:0 0 1.25rem;border-left:.375rem solid var(--ambar);padding-left:.75rem}
 h2{margin-top:0;color:var(--azul-oscuro)}
 .intro{margin-top:0}
@@ -90,3 +90,4 @@ table.productos td.num,table.productos th.num{text-align:right}
 .filtros-form{display:flex;gap:.5rem;flex-wrap:wrap;align-items:flex-end;margin-bottom:1rem}
 .filtros-form .campo{flex:1 1 12rem}
 .filtros-form label{margin-top:0}
+table.productos td:first-child{white-space:nowrap;font-weight:600}

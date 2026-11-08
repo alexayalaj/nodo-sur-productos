@@ -101,7 +101,6 @@ async function cargar() {
   cargando.hidden = true;
   if (sesionVencida) return cerrarPorSesionVencida();
   if (!cuerpo.ok) { mostrarAviso(cuerpo.mensaje, 'error'); return; }
-  mostrarAviso('');
   dibujar(cuerpo.datos);
 }
 
@@ -203,3 +202,11 @@ document.getElementById('btn-salir').addEventListener('click', async () => {
 
 document.getElementById('usuario-activo').textContent = usuario ? `Sesión: ${usuario.nombre}` : '';
 cargarCategorias().then(cargar);
+
+// Al corregir un campo se quita su mensaje de error.
+form.addEventListener('input', (e) => {
+  if (e.target.classList.contains('invalido')) marcarError(e.target.id, '');
+});
+form.addEventListener('change', (e) => {
+  if (e.target.classList.contains('invalido')) marcarError(e.target.id, '');
+});
