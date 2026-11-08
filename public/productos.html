@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Productos | Productos Nodo Sur</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="barra">
+      <img class="logo" src="images/logo.svg" alt="Logotipo de Nodo Sur Soluciones Digitales">
+      <div class="sesion">
+        <span id="usuario-activo" class="lema"></span>
+        <button type="button" id="btn-salir" class="btn btn-claro">Cerrar sesión</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container container-ancho">
+    <h1>Catálogo de productos</h1>
+
+    <form id="form-filtros" class="filtros-form" novalidate>
+      <div class="campo">
+        <label for="f-q">Buscar por nombre o SKU</label>
+        <input type="text" id="f-q" maxlength="60">
+      </div>
+      <div class="campo">
+        <label for="f-categoria">Categoría</label>
+        <select id="f-categoria"><option value="">Todas</option></select>
+      </div>
+      <div class="campo">
+        <label for="f-orden">Ordenar por</label>
+        <select id="f-orden">
+          <option value="createdAt">Más recientes</option>
+          <option value="nombre">Nombre</option>
+          <option value="precio">Precio</option>
+          <option value="stock">Stock</option>
+        </select>
+      </div>
+      <button type="button" id="btn-nuevo" class="btn">Nuevo producto</button>
+    </form>
+
+    <p class="contador" id="contador" aria-live="polite"></p>
+    <p id="aviso" class="mensaje" role="status" aria-live="polite"></p>
+    <p id="cargando" class="cargando">Cargando productos...</p>
+
+    <div class="tabla-contenedor" id="tabla-contenedor" hidden>
+      <table class="productos">
+        <caption>Productos registrados</caption>
+        <thead>
+          <tr>
+            <th scope="col">SKU</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Categoría</th>
+            <th scope="col" class="num">Precio (MXN)</th>
+            <th scope="col" class="num">Stock</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Creado por</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="cuerpo-tabla"></tbody>
+      </table>
+    </div>
+    <div id="vacio" class="vacio" hidden>
+      <span class="vacio-icono" aria-hidden="true">&#9744;</span>
+      <p>No hay productos para mostrar.</p>
+    </div>
+  </main>
+
+  <dialog id="dialogo" aria-labelledby="dialogo-titulo">
+    <form id="form-producto" novalidate>
+      <h2 id="dialogo-titulo">Nuevo producto</h2>
+      <input type="hidden" id="p-id">
+
+      <label for="p-nombre">Nombre</label>
+      <input type="text" id="p-nombre" maxlength="100" required>
+      <p class="error-campo" id="err-p-nombre" hidden></p>
+
+      <label for="p-sku">SKU</label>
+      <input type="text" id="p-sku" maxlength="30" required>
+      <p class="error-campo" id="err-p-sku" hidden></p>
+
+      <label for="p-categoria">Categoría</label>
+      <select id="p-categoria" required><option value="">Selecciona una categoría</option></select>
+      <p class="error-campo" id="err-p-categoria" hidden></p>
+
+      <label for="p-precio">Precio (MXN)</label>
+      <input type="number" id="p-precio" min="0" step="0.01" required>
+      <p class="error-campo" id="err-p-precio" hidden></p>
+
+      <label for="p-stock">Stock</label>
+      <input type="number" id="p-stock" min="0" step="1" required>
+      <p class="error-campo" id="err-p-stock" hidden></p>
+
+      <label for="p-activo">Estado</label>
+      <select id="p-activo">
+        <option value="true">Activo</option>
+        <option value="false">Inactivo</option>
+      </select>
+
+      <label for="p-descripcion">Descripción (opcional)</label>
+      <textarea id="p-descripcion" rows="3" maxlength="500"></textarea>
+
+      <p id="aviso-form" class="mensaje error" role="alert"></p>
+      <div class="acciones-form">
+        <button type="button" id="btn-cancelar" class="btn-accion">Cancelar</button>
+        <button type="submit" class="btn">Guardar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <footer class="site-footer">
+    <p>Nodo Sur Soluciones Digitales S.A. de C.V. | Actividad 4</p>
+  </footer>
+  <script src="js/api.js"></script>
+  <script src="js/productos.js"></script>
+</body>
+</html>
