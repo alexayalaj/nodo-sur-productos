@@ -9,6 +9,7 @@ const productoRoutes = require('./routes/productoRoutes');
 const { exito, fallo } = require('./utils/responder');
 
 const app = express();
+app.disable('x-powered-by');
 
 app.use(express.json({ limit: '100kb' }));
 // Express 5 deja req.body sin definir cuando no llega cuerpo.

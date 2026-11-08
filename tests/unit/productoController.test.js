@@ -96,7 +96,7 @@ describe('productoController', () => {
     const req = { params: { id: ID_PRODUCTO }, body: { nombre: 'Nuevo', creadoPor: 'intruso' } };
     const res = crearRes();
     await actualizar(req, res, jest.fn());
-    expect(Producto.findByIdAndUpdate).toHaveBeenCalledWith(ID_PRODUCTO, { nombre: 'Nuevo' }, { new: true, runValidators: true });
+    expect(Producto.findByIdAndUpdate).toHaveBeenCalledWith(ID_PRODUCTO, { nombre: 'Nuevo' }, { returnDocument: 'after', runValidators: true });
     expect(res.status).toHaveBeenCalledWith(200);
   });
 

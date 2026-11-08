@@ -71,7 +71,7 @@ async function actualizar(req, res, next) {
     }
     if (cambios.categoria) await verificarCategoria(cambios.categoria);
     const producto = await Producto.findByIdAndUpdate(req.params.id, cambios, {
-      new: true,
+      returnDocument: 'after',
       runValidators: true
     })
       .populate('categoria', 'nombre')

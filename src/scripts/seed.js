@@ -33,18 +33,18 @@ async function main() {
   const usuario = await Usuario.findOneAndUpdate(
     { correo: 'demo@nodosur.mx' },
     { nombre: 'Usuario Demo', correo: 'demo@nodosur.mx', password: hash },
-    { upsert: true, new: true, setDefaultsOnInsert: true }
+    { upsert: true, returnDocument: 'after', setDefaultsOnInsert: true }
   );
   const porNombre = {};
   for (const c of categorias) {
-    const doc = await Categoria.findOneAndUpdate({ nombre: c.nombre }, c, { upsert: true, new: true });
+    const doc = await Categoria.findOneAndUpdate({ nombre: c.nombre }, c, { upsert: true, returnDocument: 'after' });
     porNombre[c.nombre] = doc._id;
   }
   for (const p of productos) {
     await Producto.findOneAndUpdate(
       { sku: p.sku },
       { ...p, categoria: porNombre[p.categoria], creadoPor: usuario._id },
-      { upsert: true, new: true, runValidators: true }
+      { upsert: true, returnDocument: 'after', runValidators: true }
     );
   }
   console.log(`Seed listo: ${categorias.length} categorías y ${productos.length} productos. Usuario: demo@nodosur.mx`);
