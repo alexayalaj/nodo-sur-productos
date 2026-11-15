@@ -6,7 +6,7 @@ datos en MongoDB Atlas, autenticación con JWT, pruebas con Jest y despliegue en
 Corresponde a la Actividad 4 de Desarrollo Full-Stack (Universidad Tecmilenio).
 
 - Repositorio: https://github.com/alexayalaj/nodo-sur-productos
-- Aplicación: [URL de la aplicación en Vercel: pegar aquí]
+- Aplicación: https://nodo-sur-productos.vercel.app
 
 ## Requisitos
 
@@ -84,9 +84,11 @@ curl -X POST http://localhost:3000/api/auth/login -H "Content-Type: application/
 
 1. En MongoDB Atlas crea la base `nodo_sur_productos`, un usuario de base de datos propio y permite el acceso
    de red (Network Access) con `0.0.0.0/0`, porque Vercel usa IPs variables.
-2. Importa el repositorio en Vercel (proyecto sin framework). `vercel.json` reenvía `/api/*` a `api/index.js`
-   y Vercel sirve `public/` como contenido estático.
-3. En Settings > Environment Variables define `MONGODB_URI`, `JWT_SECRET` y `JWT_EXPIRES_IN`.
+2. Crea el proyecto y vincúlalo con la carpeta: `npx vercel link` (genera `.vercel/project.json`, que no se sube).
+   `vercel.json` usa el preset sin framework, reenvía `/api/*` a `api/index.js` y Vercel sirve `public/` como
+   contenido estático. También desactiva el despliegue automático desde Git (`"git": { "deploymentEnabled": false }`),
+   así que solo publica el pipeline.
+3. En Settings > Environment Variables (ambiente Production) define `MONGODB_URI`, `JWT_SECRET` y `JWT_EXPIRES_IN`.
 
 ## Pipeline de CI/CD
 
